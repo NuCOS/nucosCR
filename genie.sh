@@ -10,11 +10,17 @@ fi
 
 ###################################
 echo "----------------------------------------------------"
+{
+conda create --name $PACKAGE'3_5' python=3.5 -y
+source activate $PACKAGE'3_5'
+} || { 
 virtualenv -p $(which python3) $VENV/py3
-source $VENV/py3/bin/activate
+source $VENV/py3/bin/activate 
+}
 pip install --upgrade pip
 pip install nose2
 python setup.py sdist
+
 ###################################
 echo "----------------------------------------------------"
 sleep 1
@@ -42,8 +48,14 @@ python info.py
 sleep 3
 ###################################
 echo "----------------------------------------------------"
+{
+conda create --name $PACKAGE'2_7' python=2.7 -y
+source activate $PACKAGE'2_7'
+} || {
 virtualenv -p $(which python2) venv/py2
 source $VENV/py2/bin/activate
+}
+
 pip install --upgrade pip
 pip install nose2
 python setup.py sdist
