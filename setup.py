@@ -89,5 +89,6 @@ setup(name='python-' + name,
       data_files=data_files,
       test_suite='setup.my_test_suite', 
       install_requires=['pycrypto'],
+      include_package_data=True,
 
       )
