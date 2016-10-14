@@ -37,6 +37,9 @@ else:
 
 
 class CryptoRSABase():
+    """
+    Class is based on bytes as in- and output. Nevertheless tolerant against unicode and string input.
+    """
     fullkey = None
     extkey = None
     path = os.path.join(_path_,"PEM")

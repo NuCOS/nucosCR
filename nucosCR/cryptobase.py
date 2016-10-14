@@ -66,42 +66,32 @@ class Cryptonize():
         myhash = SHA256.new()
         myhash.update(self.passwd)
         key = myhash.digest()
-        #print key
         self.cipher = AES.new(key)
         self.PADDING = b"{"
         
     def encryption(self,pI):
-
-     #32 bytes = 256 bits
-     #16 = 128 bits
-     # the block size for cipher obj, can be 16 24 or 32. 16 matches 128 bit.
+        # the block size for cipher obj, can be 16 24 or 32. 16 matches 128 bit.
         BLOCK_SIZE = 16
-
-        try: 
-            unipI = pI.encode("utf-8")
-        except:
-            #print "seems to be not a string input"
+        if not type(pI) is bytes:
+            unipI = pI.encode()
+        else:
             unipI = pI
             
         self.pad = lambda s: s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * self.PADDING
-        #print "after pad: "+base64.b64encode(pad(privateInfo))
         # encrypt with AES, encode with base64
         EncodeAES = lambda c, s: base64.b64encode(c.encrypt(self.pad(s)))
         
         encoded = EncodeAES(self.cipher, unipI)
-    
-        #print "Encrypted string:", encoded
         return encoded
     
     def decryption(self,encryptedBytes):
-        #print(type(encryptedBytes))
         DecodeAES = lambda c, e: c.decrypt(base64.b64decode(e)).rstrip(self.PADDING)
  
         try:
             decodedBytes = DecodeAES(self.cipher, encryptedBytes)
         except:
             decoded = encryptedBytes
-            print("seems not to be encrypted!", uni_decoded)
+            #print("seems not to be encrypted!", decoded)
 
         return decodedBytes
 

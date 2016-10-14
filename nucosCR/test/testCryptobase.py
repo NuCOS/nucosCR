@@ -1,28 +1,21 @@
 from __future__ import print_function
 import unittest
-import sys, random
+import sys
 sys.path.append('../')
 
-from cryptobase import Cryptonize
-
-global c
+from cryptobase import Cryptonize, random
 
 class UTestCryptonize(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        global c
-        c = Cryptonize("test")
+        cls.c = Cryptonize("test")
 
-        
     def test_encrypt(self):
-        global c
-        text = b"alsdfjalskdfha"
-        en = c.encryption(text)
-        #print(en)    
-        de = c.decryption(en)
+        text = random(80000)
+        en = self.c.encryption(text)    
+        de = self.c.decryption(en)
         self.assertEqual(text, de)
         
     
-
 if __name__ == '__main__':
     unittest.main()
