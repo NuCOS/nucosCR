@@ -1,9 +1,8 @@
 from __future__ import print_function
 import unittest
 import sys
-sys.path.append('../')
 
-from cryptobase import Cryptonize, random
+from nucosCR.cryptobase import Cryptonize, random
 
 class UTestCryptonize(unittest.TestCase):
     @classmethod
