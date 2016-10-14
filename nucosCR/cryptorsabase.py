@@ -5,7 +5,8 @@ from Crypto.Hash import SHA
 from Crypto import Random
 import binascii, os, sys
 
-_path_ = os.path.dirname(os.path.abspath(__file__))
+#_path_ = os.path.dirname(os.path.abspath(__file__))
+_path_ = os.getcwd()
 
 ispython3 = sys.version_info > (3, 0)
 
