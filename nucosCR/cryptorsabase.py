@@ -3,10 +3,38 @@ from Crypto.Cipher import PKCS1_v1_5
 from Crypto.PublicKey import RSA
 from Crypto.Hash import SHA
 from Crypto import Random
-import binascii, os
-import nucosMQ
+import binascii, os, sys
 
 _path_ = os.path.dirname(os.path.abspath(__file__))
+
+ispython3 = sys.version_info > (3, 0)
+
+if ispython3:
+    def unicoding(x):
+        #print(type(x),x[0])
+        if type(x) is bytearray:
+            return x.decode()
+        elif type(x) is bytes:
+            return x.decode()
+        elif type(x) is str:
+            return x
+        else:
+            return x
+               
+else: 
+    def unicoding(x):
+        if type(x) is bytearray:
+            return unicode(x) #better use decode here?
+        elif type(x) is bytes:
+            return unicode(x) #better use decode here?
+        elif type(x) is str:
+            x = x.decode()
+            return x
+        elif type(x) is unicode:
+            return x
+        else:
+            return x
+
 
 class CryptoRSABase():
     fullkey = None
@@ -20,27 +48,22 @@ class CryptoRSABase():
         if not os.path.exists(self.path):
             os.mkdir(self.path)
         with open(self.filename,'w') as f:
-            f.write(nucosMQ.unicoding(key.exportKey('PEM')))
+            f.write(unicoding(key.exportKey('PEM')))
         return key
 
     def get_key_by_file(self, name):
-        print("get key by file")
         self.filename = ''.join([self.path,"/",name,'_localkey.pem'])
         if not os.path.exists(self.filename):
             self.create_rsa_key(name)
         with open(self.filename, 'r') as f:
             key_txt = f.read()
         self.fullkey = key = RSA.importKey(key_txt)
-        #now produce the public pair part
-        #filename = ''.join([self.path,name,'_publickey.pem'])
-        #with open (filename,'w') as f:
-        #    f.write(key.publickey().exportKey('PEM'))
         return key
 
     def get_hex_key(self, name):
         if not self.fullkey:
             self.get_key_by_file(name)
-        return nucosMQ.unicoding(binascii.hexlify(self.fullkey.publickey().exportKey('DER')))
+        return unicoding(binascii.hexlify(self.fullkey.publickey().exportKey('DER')))
 
     def set_hex_key(self, hextxt):
         self.extkey = key = RSA.importKey(binascii.unhexlify(hextxt))
@@ -76,8 +99,8 @@ class CryptoRSABase():
         digest = SHA.new(message[:-dsize]).digest()
         if digest==message[-dsize:]:                # Note how we DO NOT look for the sentinel
             #print ("Encryption was correct..",message[:-dsize])
-            return nucosMQ.unicoding(message[:-dsize])
+            return message[:-dsize]
         else:
             #print ("Encryption was not correct.")
-            return nucosMQ.unicoding(message[:-dsize])
+            return message[:-dsize]
         

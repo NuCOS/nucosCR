@@ -18,10 +18,11 @@ class UTestCryptonize(unittest.TestCase):
         global c
         text = b"alsdfjalskdfha"
         en = c.encryption(text)
-        print(en)    
+        #print(en)    
         de = c.decryption(en)
-        
         self.assertEqual(text, de)
         
+    
+
 if __name__ == '__main__':
     unittest.main()

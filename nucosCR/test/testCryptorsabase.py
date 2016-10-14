@@ -1,36 +1,39 @@
 from __future__ import print_function
 import unittest
-import sys, random
+import sys, random, os
 sys.path.append('../')
 
 from cryptorsabase import CryptoRSABase
 
-global c
 
 class UTestCryptoRSABase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        global c
-        c = CryptoRSABase()
+        cls.c = CryptoRSABase()
+        
+    @classmethod
+    def tearDownClass(cls):
+        try:
+            os.remove('../PEM/test_admin_localkey.pem')
+        except:
+            pass
 
     def test_create_rsa_key(self):
-        global c
-        name = "admin"
-        key1 = c.create_rsa_key(name)
-        key2 = c.get_key_by_file(name)
+        name = "test_admin"
+        key1 = self.c.create_rsa_key(name)
+        key2 = self.c.get_key_by_file(name)
         #print (key1, key2)
         self.assertEqual(key1, key2)
         
     def test_encrypt(self):
-        global c
-        name = "admin"
-        hexkey = c.get_hex_key(name)
-        print(hexkey)    
-        txt = "message"
-        en = c.encrypt(txt, hexkey)
-        #print txt, en
-        de = c.decrypt(name, en)
+        name = "test_admin"
+        hexkey = self.c.get_hex_key(name)    
+        txt = b"message"
+        en = self.c.encrypt(txt, hexkey)
+        de = self.c.decrypt(name, en)
         self.assertEqual(txt, de)
         
+                
+
 if __name__ == '__main__':
     unittest.main()

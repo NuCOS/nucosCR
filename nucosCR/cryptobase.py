@@ -15,7 +15,6 @@ import base64, os, binascii
 # os is for urandom, which is an accepted producer of randomness that
 # is suitable for cryptology.
 #import os
-import nucosMQ
 
 def read_from_file(filename):
     with open(filename, "rb") as in_file:
@@ -57,7 +56,7 @@ def random(n):
 
 class Cryptonize():
     """
-    class is based in bytes as input and output
+    class is based on bytes as input and output. Nevertheless tolerant against unicode and string input.
     """
     def __init__(self, passwd):
         if not type(passwd) is bytes:
