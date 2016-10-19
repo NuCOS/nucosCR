@@ -3,7 +3,8 @@ import unittest
 import sys
 sys.path.append('../../')
 from nucosCR import CryptoAESBase, random
-
+import nucosCR
+print(nucosCR.__file__)
 
 class UTestCryptonize(unittest.TestCase):
     @classmethod
