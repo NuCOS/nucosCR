@@ -6,6 +6,9 @@
 Welcome to nucosCR's documentation!
 ===================================
 
+nucosCR is a cryptonize Toolbax based on *pycrypto* an the examples therein. The project aim is to improve the usability of the low level 
+API. It implements up to now only our main needs: RSA and AES. 
+
 .. toctree::
    :maxdepth: 2
 

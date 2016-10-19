@@ -36,6 +36,6 @@ $(window).resize(function(){
         $("li.nav-item-0 a").text("Top");
     }
     else {
-        $("li.nav-item-0 a").text("nucosCR 0.0.2 documentation");
+        $("li.nav-item-0 a").text("nucosCR 0.0.4 documentation");
     }
 });
