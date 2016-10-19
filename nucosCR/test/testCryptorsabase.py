@@ -2,8 +2,8 @@ from __future__ import print_function
 import unittest
 import sys, os
 sys.path.append('../../')
-from nucosCR.cryptorsabase import CryptoRSABase
-from nucosCR.cryptobase import random
+from nucosCR import CryptoRSABase
+from nucosCR import random
 
 
 class UTestCryptoRSABase(unittest.TestCase):

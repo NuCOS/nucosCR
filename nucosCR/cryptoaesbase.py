@@ -54,7 +54,7 @@ def random(n):
     hexnumber = binascii.hexlify(number)
     return hexnumber
 
-class Cryptonize():
+class CryptoAESBase():
     """
     class is based on bytes as input and output. Nevertheless tolerant against unicode and string input.
     """

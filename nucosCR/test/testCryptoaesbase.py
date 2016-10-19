@@ -2,12 +2,13 @@ from __future__ import print_function
 import unittest
 import sys
 sys.path.append('../../')
-from nucosCR.cryptobase import Cryptonize, random
+from nucosCR import CryptoAESBase, random
+
 
 class UTestCryptonize(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.c = Cryptonize("test")
+        cls.c = CryptoAESBase("test")
 
     def test_encrypt(self):
         text = random(80000)

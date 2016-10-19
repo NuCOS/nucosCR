@@ -60,7 +60,7 @@ for dirname, dirnames, filenames in os.walk('doc'):
             fileslist.append(fullname)
         data_files.append(('share/' + name + '/' + dirname, fileslist))
 
-setup(name='python-' + name,
+setup(name=name,
       version=version,  # PEP440
       description='nucosCR - convenient python crypto-tools',
       long_description=long_description,

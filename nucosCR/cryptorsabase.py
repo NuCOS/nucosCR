@@ -68,10 +68,6 @@ class CryptoRSABase():
         if not self.fullkey:
             self.get_key_by_file(name)
         return unicoding(binascii.hexlify(self.fullkey.publickey().exportKey('DER')))
-
-    def set_hex_key(self, hextxt):
-        self.extkey = key = RSA.importKey(binascii.unhexlify(hextxt))
-        return True
         
     def random(self,n):
         out = Random.new()
@@ -84,15 +80,12 @@ class CryptoRSABase():
             message = message.encode()
 
         h = SHA.new(message)
-        #try:
+
         key = RSA.importKey(binascii.unhexlify(hexkey))
         cipher = PKCS1_v1_5.new(key)
         tail = h.digest()
         return cipher.encrypt(message+tail)
-        #except:
-        #    print ("----- no hexkey ------")
-        #    return None
-        
+
     def decrypt(self,name,ciphertext):
         if not self.fullkey:
             self.get_key_by_file(name)
