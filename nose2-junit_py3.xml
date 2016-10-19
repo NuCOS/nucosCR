@@ -1,11 +1,11 @@
-<testsuite errors="0" failures="0" name="nose2-junit" skipped="0" tests="3" time="0.134">
-  <testcase classname="testCryptobase.UTest_py3_Cryptonize" name="test_encrypt" time="0.004739">
+<testsuite errors="0" failures="0" name="nose2-junit" skipped="0" tests="3" time="0.192">
+  <testcase classname="testCryptobase.UTest_py3_Cryptonize" name="test_encrypt" time="0.004695">
     <system-err />
   </testcase>
-  <testcase classname="testCryptorsabase.UTest_py3_CryptoRSABase" name="test_create_rsa_key" time="0.125801">
+  <testcase classname="testCryptorsabase.UTest_py3_CryptoRSABase" name="test_create_rsa_key" time="0.183588">
     <system-err />
   </testcase>
-  <testcase classname="testCryptorsabase.UTest_py3_CryptoRSABase" name="test_encrypt" time="0.003230">
+  <testcase classname="testCryptorsabase.UTest_py3_CryptoRSABase" name="test_encrypt" time="0.003252">
     <system-err />
   </testcase>
 </testsuite>

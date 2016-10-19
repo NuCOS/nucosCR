@@ -1,7 +1,7 @@
 from __future__ import print_function
 import unittest
 import sys
-
+sys.path.append('../../')
 from nucosCR.cryptobase import Cryptonize, random
 
 class UTestCryptonize(unittest.TestCase):
