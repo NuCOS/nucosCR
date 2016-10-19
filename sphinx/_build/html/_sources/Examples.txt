@@ -1,0 +1,44 @@
+.. _examples:
+
+Installation
+============
+
+.. sidebar:: Kurzfassung
+
+    - *Q:\\FDM-Installer\\install\\install_fdm.exe* durch Doppelklick ausführen
+    - Zur Installation des nächsten Releases ist keine Deinstallation erforderlich
+    - persönliche Einstellungen und Daten werden nicht überschrieben
+
+.. index:: Installation
+
+Die Installationsanweisungen gelten sowohl für die *Erstinstallation* als auch die Installation eines *neuen Release*.
+
+Die ausführbare Installations-Datei liegt auf dem Server unter: *Q:\\FDM-Installer\\install\\install_fdm.exe* und kann einfach durch Doppelklick auf dem eigenen Computer ausgeführt werden. Sie muss dazu nicht in einen lokalen Ordner kopiert werden. Die Installation dauert ca. 5 Minuten und benötigt Netzwerkzugang. 
+
+   
+Im normalen Modus, d.h. wenn die Installation mit Doppelklick gestartet wird, erscheint ein Command-Shell-Window und daraufhin der erste Informationsdialog des Installers; der Benutzer wird genannt und aufgefordert, das lokale Archiv anzugeben. Nach erfolgter Installation erscheint eine entsprechende Information für den Benutzer.
+
+
+.. index:: Lokales Archiv
+
+Lokales Archiv
+--------------
+In das lokale Archiv kann der Anwender Mess- und Ergebnisdaten ablegen wie auf *Q:\\Archiv*. Die Ablagestruktur im lokalen Archiv
+sollte derjenigen in Q:\\Archiv ähnlich sein: im obersten Archivordner liegen zunächst die Jahreszahlen, das sind wichtige strukturierenden Elemente für die Datenbankzugriffe. Darunter ist die Struktur 
+beliebig, es werden alle Mess- und Ergebnisdaten berücksichtigt, die in einer Jahreszahl darunter liegen. Andere Ordnernamen werden nicht berücksichtigt.
+
+Der Pfad des lokalen Archivs kann in der momentanen Programmfassung nicht über die Oberfläche geändert werden. Bei der Installation wird ein user_config.ini als ascii-Datei abgelegt, das diese Information enthält und per Hand angepasst werden kann, falls sich das lokale Archiv geändert hat und das FDM-Tool nicht mehr darauf zugreifen kann. 
+
+
+Ort der Installation
+--------------------
+Die Installation erfolgt standardmäßig in den lokalen Pfad *C:\\FDM-Tool*. Dort und in den Unterordnern liegen alle Abhängigkeiten (z.B. .dll-Dateien) und die lokalen Datenbanken im Ordner *C:\\FDM-Tool\\data*.
+In C:\\FDM-Tool wird eine Datei **user_config.ini** angelegt. Diese enthält die lokal relevanten Einstellungen der Benutzer. Derzeit sind dies:
+
+- FDM-Tool-Installationszeitpunkt des Anwenders
+- Pfadangabe zum lokalen Archiv des Anwenders
+
+Auch auf *Q:\\FDM-Installer\\FDM-Tool* wird die Datei user_config.ini geschrieben. Hier sind die Installationszeitpunkte aller User und deren lokale Archivpfade gespeichert.
+
+
+

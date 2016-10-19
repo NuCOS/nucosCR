@@ -1,0 +1,145 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation &mdash; nucosCR 0.0.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="top" title="nucosCR 0.0.2 documentation" href="index.html" />
+    <link rel="prev" title="Installation" href="Install.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Install.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">nucosCR 0.0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#lokales-archiv">Lokales Archiv</a></li>
+<li><a class="reference internal" href="#ort-der-installation">Ort der Installation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Install.html"
+                        title="previous chapter">Installation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Examples.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation">
+<span id="examples"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="sidebar">
+<p class="first sidebar-title">Kurzfassung</p>
+<ul class="last simple">
+<li><em>Q:\FDM-Installer\install\install_fdm.exe</em> durch Doppelklick ausführen</li>
+<li>Zur Installation des nächsten Releases ist keine Deinstallation erforderlich</li>
+<li>persönliche Einstellungen und Daten werden nicht überschrieben</li>
+</ul>
+</div>
+<p id="index-0">Die Installationsanweisungen gelten sowohl für die <em>Erstinstallation</em> als auch die Installation eines <em>neuen Release</em>.</p>
+<p>Die ausführbare Installations-Datei liegt auf dem Server unter: <em>Q:\FDM-Installer\install\install_fdm.exe</em> und kann einfach durch Doppelklick auf dem eigenen Computer ausgeführt werden. Sie muss dazu nicht in einen lokalen Ordner kopiert werden. Die Installation dauert ca. 5 Minuten und benötigt Netzwerkzugang.</p>
+<p>Im normalen Modus, d.h. wenn die Installation mit Doppelklick gestartet wird, erscheint ein Command-Shell-Window und daraufhin der erste Informationsdialog des Installers; der Benutzer wird genannt und aufgefordert, das lokale Archiv anzugeben. Nach erfolgter Installation erscheint eine entsprechende Information für den Benutzer.</p>
+<div class="section" id="lokales-archiv">
+<span id="index-1"></span><h2>Lokales Archiv<a class="headerlink" href="#lokales-archiv" title="Permalink to this headline">¶</a></h2>
+<p>In das lokale Archiv kann der Anwender Mess- und Ergebnisdaten ablegen wie auf <em>Q:\Archiv</em>. Die Ablagestruktur im lokalen Archiv
+sollte derjenigen in Q:\Archiv ähnlich sein: im obersten Archivordner liegen zunächst die Jahreszahlen, das sind wichtige strukturierenden Elemente für die Datenbankzugriffe. Darunter ist die Struktur
+beliebig, es werden alle Mess- und Ergebnisdaten berücksichtigt, die in einer Jahreszahl darunter liegen. Andere Ordnernamen werden nicht berücksichtigt.</p>
+<p>Der Pfad des lokalen Archivs kann in der momentanen Programmfassung nicht über die Oberfläche geändert werden. Bei der Installation wird ein user_config.ini als ascii-Datei abgelegt, das diese Information enthält und per Hand angepasst werden kann, falls sich das lokale Archiv geändert hat und das FDM-Tool nicht mehr darauf zugreifen kann.</p>
+</div>
+<div class="section" id="ort-der-installation">
+<h2>Ort der Installation<a class="headerlink" href="#ort-der-installation" title="Permalink to this headline">¶</a></h2>
+<p>Die Installation erfolgt standardmäßig in den lokalen Pfad <em>C:\FDM-Tool</em>. Dort und in den Unterordnern liegen alle Abhängigkeiten (z.B. .dll-Dateien) und die lokalen Datenbanken im Ordner <em>C:\FDM-Tool\data</em>.
+In C:\FDM-Tool wird eine Datei <strong>user_config.ini</strong> angelegt. Diese enthält die lokal relevanten Einstellungen der Benutzer. Derzeit sind dies:</p>
+<ul class="simple">
+<li>FDM-Tool-Installationszeitpunkt des Anwenders</li>
+<li>Pfadangabe zum lokalen Archiv des Anwenders</li>
+</ul>
+<p>Auch auf <em>Q:\FDM-Installer\FDM-Tool</em> wird die Datei user_config.ini geschrieben. Hier sind die Installationszeitpunkte aller User und deren lokale Archivpfade gespeichert.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Install.html" title="Installation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">nucosCR 0.0.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2016, Oliver Braun, Johannes Eckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
