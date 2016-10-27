@@ -10,6 +10,11 @@ import unittest
 
 name = "nucosCR"
 
+#action should be one of update/minor/major
+possible_action = ["major","minor","update", "hand"]
+action = "update"
+
+
 
 def my_test_suite():
     test_loader = unittest.TestLoader()
@@ -19,7 +24,16 @@ def my_test_suite():
 rootdir = os.path.abspath(os.path.dirname(__file__))
 
 # Restructured text project description read from file
-long_description = open(os.path.join(rootdir, 'README.md')).read()
+try:
+    from pypandoc import convert
+    read_md = lambda f: convert(f, 'rst')
+except ImportError:
+    print("warning: pypandoc module not found, could not convert Markdown to RST")
+    read_md = lambda f: open(f, 'r').read()
+
+long_description = read_md('README.md') # open(os.path.join(rootdir, 'README.md')).read() #
+
+#print(long_description)
 
 # Python 2.7 or later needed
 if sys.version_info < (2, 7, 0, 'final', 0):
@@ -38,6 +52,22 @@ package_data = {} #{name: [os.path.join(name, 'tests', 'prt.txt')]}
 
 # The current version number - MSI accepts only version X.X.X
 exec(open(os.path.join(name, 'version.py')).read())
+
+#update the version count according to action
+if action not in possible_action:
+    raise SystemExit("action should be one of minor/major/update/hand")
+
+if not action == "hand":
+    version_i = [int(x) for x in version.split(".")]
+    version_i[possible_action.index(action)] += 1
+    version = ".".join([str(x) for x in version_i])
+
+    
+
+    with open(os.path.join(name, 'version.py'), 'w') as f:
+        f.write("version='"+version+"'")
+
+print("Version:", version)
 
 # Scripts
 scripts = []
