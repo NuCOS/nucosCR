@@ -33,8 +33,6 @@ except ImportError:
 
 long_description = read_md('README.md') # open(os.path.join(rootdir, 'README.md')).read() #
 
-#print(long_description)
-
 # Python 2.7 or later needed
 if sys.version_info < (2, 7, 0, 'final', 0):
     raise SystemExit('Python 2.7 or later is required!')
