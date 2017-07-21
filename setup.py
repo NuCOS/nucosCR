@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 
 import os
 import sys
@@ -7,14 +8,20 @@ import sys
 from setuptools import setup, find_packages
 
 import unittest
+#use of setup.py
+# to distribute in pypi: python setup.py sdist upload -r pypitest/pypi
+# to install locally: python setup.py install (builds the egg in side-packages)
+#                     or better pip install -e ./
 
 name = "nucosCR"
 
 #action should be one of update/minor/major
-possible_action = ["major","minor","update", "hand"]
+possible_action = ["major","minor","update", "no-update"]
 action = "update"
 
-
+if len(sys.argv) > 1:
+    if not sys.argv[1] == "sdist":
+        action = "no-update"    
 
 def my_test_suite():
     test_loader = unittest.TestLoader()
@@ -31,9 +38,7 @@ except ImportError:
     print("warning: pypandoc module not found, could not convert Markdown to RST")
     read_md = lambda f: open(f, 'r').read()
 
-long_description = read_md('README.md') # open(os.path.join(rootdir, 'README.md')).read() #
-
-#print(long_description)
+long_description = read_md('README.md')     #open(os.path.join(rootdir, 'README.md')).read()
 
 # Python 2.7 or later needed
 if sys.version_info < (2, 7, 0, 'final', 0):
@@ -57,7 +62,7 @@ exec(open(os.path.join(name, 'version.py')).read())
 if action not in possible_action:
     raise SystemExit("action should be one of minor/major/update/hand")
 
-if not action == "hand":
+if not action == "no-update":
     version_i = [int(x) for x in version.split(".")]
     version_i[possible_action.index(action)] += 1
     version = ".".join([str(x) for x in version_i])
@@ -78,8 +83,10 @@ for dirname, dirnames, filenames in os.walk('scripts'):
 
 # Provide bat executables in the tarball (always for Win)
 if 'sdist' in sys.argv or os.name in ['ce', 'nt']:
-    for s in scripts[:]:
-        scripts.append(s + '.bat')
+    for dirname, dirnames, filenames in os.walk('scripts'):
+        for filename in filenames:
+            if filename.endswith('.bat'):
+                scripts.append(os.path.join(dirname, filename))
 
 # Data_files (e.g. doc) needs (directory, files-in-this-directory) tuples
 data_files = []

@@ -16,7 +16,7 @@ class UTestCryptonize(unittest.TestCase):
     def test_encrypt(self):
         text = random(80000)
         en = self.c.encryption(text)    
-        de = self.c.decryption(en)
+        de, _ = self.c.decryption(en)
         self.assertEqual(text, de)
         
     

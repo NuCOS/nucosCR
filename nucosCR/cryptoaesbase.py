@@ -16,6 +16,19 @@ import base64, os, binascii
 # is suitable for cryptology.
 #import os
 
+def hexdigest(s):
+    h = SHA256.new()
+    if not type(s) == bytes:
+        h.update(s.encode('utf8'))
+    else:
+        h.update(s)
+    return h.hexdigest()
+
+def hexdigest_n(s, n_max):
+    for n in range(n_max):
+        s = hexdigest(s)
+    return s
+
 def read_from_file(filename):
     with open(filename, "rb") as in_file:
         data = in_file.read()
@@ -86,12 +99,12 @@ class CryptoAESBase():
     
     def decryption(self,encryptedBytes):
         DecodeAES = lambda c, e: c.decrypt(base64.b64decode(e)).rstrip(self.PADDING)
- 
+        success = True
         try:
             decodedBytes = DecodeAES(self.cipher, encryptedBytes)
         except:
             decoded = encryptedBytes
             #print("seems not to be encrypted!", decoded)
-
-        return decodedBytes
+            success = False
+        return decodedBytes, success
 
