@@ -6,7 +6,7 @@ This module is in alpha stage, any usage is on your own risk and responsibility.
 ```
 pip install nucosCR
 ```
-or download the tarball at [https://github.com/DocBO/nucosCR](https://github.com/DocBO/nucosCR), unzip and type
+or download the tarball at [https://github.com/NuCOS/nucosCR](https://github.com/NuCOS/nucosCR), unzip and type
 ```
 python setup.py install
 ```
