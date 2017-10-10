@@ -20,7 +20,7 @@ pip install --use-wheel --no-index --find-links=https://github.com/sfbahr/PyCryp
 For different architectures see there.
 
 ## Documentation
-[https://pythonhosted.org/nucosCR](https://pythonhosted.org/nucosCR)
+[http://nucoscr.readthedocs.io/](http://nucoscr.readthedocs.io/)
 
 ## Recommended test runner
 ```
