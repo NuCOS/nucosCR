@@ -1,0 +1,162 @@
+#! /home/oliver/anaconda/bin/python
+# -*- coding: utf-8 -*-
+
+from __future__ import print_function
+import os, sys, copy
+from nucosCR import write_to_file, read_from_file, CryptoAESBase, hexdigest, hexdigest_n, get_crc_from_file
+#from nucosCR.cryptoaesbase import write_to_file, read_from_file, CryptoAESBase, hexdigest, hexdigest_n, get_crc_from_file
+import getpass
+
+def exit(n):
+    sys.exit(n)
+
+def goodbye():
+    print("choose one of the following arguments: -e, -d, -c")
+    print("""
+    if the source is a folder, it is copied recursively into the the destination
+    short description: 
+        -e source destination encryption copy
+        -d source destination decryption copy
+        -c file1 file2 check crc
+        -o overwrite flag (default is not overwrite), if set it overwrites the files in the destination
+    """)
+    exit(2)
+
+def make_recursive_dir(d):
+    dirs = d.split("/")
+    _newdir = "."
+    for d in dirs:
+        _newdir = "/".join([_newdir,d])
+        if not os.path.exists(_newdir):
+            os.mkdir(_newdir)
+        
+
+p_args = ["-e", "-d", "-c", "-o"]
+
+try:
+    if sys.argv[1] == "--help":
+        sys.argv.remove("--help")
+except:
+    pass
+
+if len(sys.argv) == 1:
+    goodbye()
+
+if "-o" in sys.argv:
+    sys.argv.remove("-o")
+    overwrite = True
+else:
+    overwrite = False
+
+if "-d" in sys.argv:
+    sys.argv.remove("-d")
+    task = "d"
+elif "-e" in sys.argv:
+    sys.argv.remove("-e")
+    task = "e"
+elif "-c" in sys.argv:
+    sys.argv.remove("-c")
+    task = "c"
+else:
+    goodbye()
+    
+
+arguments = copy.copy(sys.argv)
+
+try:
+    source = arguments[1]
+    dest = arguments[2]
+except:
+    print("give me source and destination")
+    exit(2)
+
+if not os.path.exists(source):
+    print("Source not found")
+    exit(2)
+
+if not os.path.exists(dest):
+    mode_dest = "file"
+
+if os.path.isdir(dest):
+    mode_dest = "dir"
+else:
+    mode_dest = "file"
+
+if os.path.isdir(source):
+    mode_source = "dir"
+else:
+    mode_source = "file"
+
+
+if task=="c":
+    print(source, dest, get_crc_from_file(source)==get_crc_from_file(dest))
+    exit(2)
+
+password = getpass.getpass()
+passphrase = hexdigest_n(password, 100)
+
+base = CryptoAESBase(passphrase)
+
+
+if mode_source == "file":
+    if mode_dest == "file":
+        dest_file = dest
+    else:
+        dest_file = os.path.join(dest, os.path.basename(source))
+    data = read_from_file(source)
+    print("copy: ", source, dest_file)
+    if task == "e":
+        endata = base.encryption(data)
+        if not os.path.exists(dest_file) or overwrite:
+            write_to_file(dest_file, endata)
+        else:
+            print("copy chanceled, no overwrite mode (use -o to enable)")
+    else:
+        dedata, success = base.decryption(data)
+        if not os.path.exists(dest_file) or overwrite:
+            write_to_file(dest_file, dedata)
+        else:
+            print("copy chanceled, no overwrite mode (use -o to enable)")
+elif mode_source == "dir":
+    if mode_dest == "file":
+        print("Not possible to copy folder into single file")
+        exit(2)
+    dest_folder = os.path.join(dest, os.path.basename(source))
+    if not os.path.exists(dest_folder):
+        os.mkdir(dest_folder)
+    
+    for root, dirs, files in os.walk(source):
+        root_tail = root[len(source)+1:]
+        folder = os.path.join(dest_folder, root_tail)
+        #print(root, dirs, files, folder)
+        for name in dirs:
+            _folder = os.path.join(folder, name)
+            if not os.path.exists(_folder):
+                make_recursive_dir(_folder)
+        for name in files:
+            dest_file = os.path.join(folder, name)
+            source_file = os.path.join(root,name)
+            print("copy: ", source_file, dest_file)
+            data = read_from_file(source_file)
+            if task == "e":
+                endata = base.encryption(data)
+                if not os.path.exists(dest_file) or overwrite:
+                    write_to_file(dest_file, endata)
+                else:
+                    print("copy chanceled, no overwrite mode (use -o to enable)")
+            else:
+                dedata, success = base.decryption(data)
+                if success:
+                    if not os.path.exists(dest_file) or overwrite:
+                        write_to_file(dest_file, dedata)
+                    else:
+                        print("copy chanceled, no overwrite mode (use -o to enable)")
+                else:
+                    print("Decryption failed, file not copied")
+
+
+
+    
+
+
+

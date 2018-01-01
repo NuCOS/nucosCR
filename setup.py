@@ -15,13 +15,6 @@ import unittest
 
 name = "nucosCR"
 
-#action should be one of update/minor/major
-possible_action = ["major","minor","update", "no-update"]
-action = "update"
-
-if len(sys.argv) > 1:
-    if not sys.argv[1] == "sdist":
-        action = "no-update"    
 
 def my_test_suite():
     test_loader = unittest.TestLoader()
@@ -57,21 +50,6 @@ package_data = {} #{name: [os.path.join(name, 'tests', 'prt.txt')]}
 
 # The current version number - MSI accepts only version X.X.X
 exec(open(os.path.join(name, 'version.py')).read())
-
-#update the version count according to action
-if action not in possible_action:
-    raise SystemExit("action should be one of minor/major/update/hand")
-
-if not action == "no-update":
-    version_i = [int(x) for x in version.split(".")]
-    version_i[possible_action.index(action)] += 1
-    version = ".".join([str(x) for x in version_i])
-
-    
-
-    with open(os.path.join(name, 'version.py'), 'w') as f:
-        f.write("version='"+version+"'")
-
 print("Version:", version)
 
 # Scripts
