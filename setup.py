@@ -25,9 +25,8 @@ rootdir = os.path.abspath(os.path.dirname(__file__))
 
 
 long_description = """
-A package for observers and observables based on asyncio
 
-.. _Dokumentation: http://nucosCR.readthedocs.io/
+Dokumentation: [http://nucoscr.readthedocs.io/]
 
 """
 
