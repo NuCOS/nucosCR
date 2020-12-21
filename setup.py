@@ -23,15 +23,12 @@ def my_test_suite():
 
 rootdir = os.path.abspath(os.path.dirname(__file__))
 
-# Restructured text project description read from file
-try:
-    from pypandoc import convert
-    read_md = lambda f: convert(f, 'rst')
-except ImportError:
-    print("warning: pypandoc module not found, could not convert Markdown to RST")
-    read_md = lambda f: open(f, 'r').read()
 
-long_description = read_md('README.md')     #open(os.path.join(rootdir, 'README.md')).read()
+long_description = """
+
+Dokumentation: [http://nucoscr.readthedocs.io/]
+
+"""
 
 # Python 2.7 or later needed
 if sys.version_info < (2, 7, 0, 'final', 0):
