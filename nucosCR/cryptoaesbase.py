@@ -4,10 +4,9 @@ Created on Tue Nov 18 11:19:37 2014
 
 @author: BRAUOLI
 """
-from __future__ import print_function
-from Crypto.Cipher import AES
-from Crypto.Hash import SHA256
-from Crypto import Random
+from Cryptodome.Cipher import AES
+from Cryptodome.Hash import SHA256
+from Cryptodome import Random
 #base64 is used for encoding. dont confuse encoding with encryption#
 #encryption is used for disguising data
 #encoding is used for putting data in a specific format
@@ -78,13 +77,13 @@ class CryptoAESBase():
             self.passwd = passwd
         myhash = SHA256.new()
         myhash.update(self.passwd)
-        key = myhash.digest()
-        self.cipher = AES.new(key)
+        self.key = myhash.digest()
         self.PADDING = b"{"
         
-    def encryption(self,pI):
+    def encryption(self, pI):
         # the block size for cipher obj, can be 16 24 or 32. 16 matches 128 bit.
         BLOCK_SIZE = 16
+        cipher = AES.new(self.key, AES.MODE_EAX)
         if not type(pI) is bytes:
             unipI = pI.encode()
         else:
@@ -94,17 +93,18 @@ class CryptoAESBase():
         # encrypt with AES, encode with base64
         EncodeAES = lambda c, s: base64.b64encode(c.encrypt(self.pad(s)))
         
-        encoded = EncodeAES(self.cipher, unipI)
-        return encoded
+        encoded = EncodeAES(cipher, unipI)
+        return encoded, cipher.nonce
     
-    def decryption(self,encryptedBytes):
+    def decryption(self, encryptedBytes, nonce):
+        cipher = AES.new(self.key, AES.MODE_EAX, nonce=nonce)
         DecodeAES = lambda c, e: c.decrypt(base64.b64decode(e)).rstrip(self.PADDING)
         success = True
-        try:
-            decodedBytes = DecodeAES(self.cipher, encryptedBytes)
-        except:
-            decoded = encryptedBytes
-            #print("seems not to be encrypted!", decoded)
-            success = False
+        #try:
+        decodedBytes = DecodeAES(cipher, encryptedBytes)
+        #except:
+        #    decodedBytes = encryptedBytes
+        #    print("seems not to be encrypted!", decodedBytes)
+        #    success = False
         return decodedBytes, success
 

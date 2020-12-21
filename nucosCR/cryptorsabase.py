@@ -1,8 +1,7 @@
-from __future__ import print_function
-from Crypto.Cipher import PKCS1_v1_5
-from Crypto.PublicKey import RSA
-from Crypto.Hash import SHA
-from Crypto import Random
+from Cryptodome.Cipher import PKCS1_v1_5
+from Cryptodome.PublicKey import RSA
+from Cryptodome.Hash import SHA
+from Cryptodome import Random
 import binascii, os, sys
 
 #_path_ = os.path.dirname(os.path.abspath(__file__))

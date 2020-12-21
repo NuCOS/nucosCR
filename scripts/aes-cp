@@ -59,7 +59,14 @@ elif "-c" in sys.argv:
     task = "c"
 else:
     goodbye()
-    
+
+if "-p" in sys.argv:
+    i = sys.argv.index("-p")
+    password = sys.argv[i+1]
+    sys.argv.remove("-p")
+    sys.argv.remove(password)
+else:
+    password = getpass.getpass()
 
 arguments = copy.copy(sys.argv)
 
@@ -92,7 +99,7 @@ if task=="c":
     print(source, dest, get_crc_from_file(source)==get_crc_from_file(dest))
     exit(2)
 
-password = getpass.getpass()
+
 passphrase = hexdigest_n(password, 100)
 
 base = CryptoAESBase(passphrase)
