@@ -5,6 +5,21 @@ newest first.
 
 ---
 
+## Documentation overhaul — 2026-08-01
+
+### 🚀 COMPLETED: comprehensive usage documentation
+- Created `docs/USAGE.md` — a full API reference and recipe guide covering
+  every public export: AES-GCM encrypt/decrypt (including tamper detection,
+  file I/O, legacy EAX compat, and the internal blob format), salted password
+  hashing with `hexdigest`/`hexdigest_n`/`verify_hexdigest` and a complete
+  credential-migration recipe, RSA key management and encrypt/decrypt, file
+  utilities (`read_from_file`/`write_from_file`/`get_crc_from_file`/`random`),
+  the `aes-cp` CLI tool, and the module `version` export.
+- Rewrote `README.md` with a concise install/quick-start section and a
+  prominent table-of-contents linking into `docs/USAGE.md`.
+
+---
+
 ## Repository hygiene — 2026-08-01
 
 ### 🚀 COMPLETED: GitHub-ready repository
