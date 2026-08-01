@@ -1,0 +1,23 @@
+# Normalize line endings for text files; keep binaries untouched.
+* text=auto
+
+# Shell scripts must keep LF so they remain executable on Unix.
+*.sh text eol=lf
+
+# Windows batch wrappers.
+*.bat text eol=crlf
+
+# Source
+*.py text eol=lf
+*.toml text eol=lf
+*.cfg text eol=lf
+
+# Docs
+*.md text
+*.rst text
+
+# Binaries / generated
+*.pem binary
+*.png binary
+*.jpg binary
+*.ico binary

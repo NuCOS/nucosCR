@@ -5,6 +5,21 @@ newest first.
 
 ---
 
+## Repository hygiene — 2026-08-01
+
+### 🚀 COMPLETED: GitHub-ready repository
+- Updated `LICENSE.txt` copyright year to **2016–2026**.
+- Added GitHub Actions CI (`.github/workflows/ci.yml`): pytest matrix on Python
+  3.10–3.13 plus a build job producing sdist + wheel and running `twine check`.
+- Added standard project files: `CONTRIBUTING.md`, `SECURITY.md`,
+  `CODE_OF_CONDUCT.md`, `.editorconfig`, and `.gitattributes`.
+- Removed the dead `info.py` diagnostic (only used by the deleted legacy
+  `genie.sh`).
+- Cleaned regenerable build/test artifacts (venv, `dist`, egg-info, caches,
+  test `PEM` key) from the working tree.
+
+---
+
 ## Deployment & testing overhaul — 2026-08-01
 
 ### 🚀 COMPLETED: pytest-only testing system
