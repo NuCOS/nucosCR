@@ -1,3 +1,5 @@
 from .cryptorsabase import CryptoRSABase
-from .cryptoaesbase import CryptoAESBase, random, read_from_file, write_to_file, get_crc_from_file, hexdigest, hexdigest_n, get_crc_from_file
+from .cryptoaesbase import (CryptoAESBase, random, read_from_file,
+                            write_to_file, get_crc_from_file, hexdigest,
+                            hexdigest_n, verify_hexdigest)
 from .version import version

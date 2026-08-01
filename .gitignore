@@ -71,6 +71,8 @@ target/
 
 #test
 test-reports/
+.pytest_cache/
+.pytest_cache/**
 
 # IPython Notebook
 .ipynb_checkpoints

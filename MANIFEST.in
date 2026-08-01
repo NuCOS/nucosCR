@@ -1,1 +1,5 @@
 include README.md
+include docs/CHANGELOG.md
+include docs/STATUS_REPORT.md
+recursive-include nucosCR/test *.py
+recursive-include scripts *

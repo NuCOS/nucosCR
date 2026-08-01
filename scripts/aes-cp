@@ -1,10 +1,9 @@
-#! /home/oliver/anaconda/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
 import os, sys, copy
-from nucosCR import write_to_file, read_from_file, CryptoAESBase, hexdigest, hexdigest_n, get_crc_from_file
-#from nucosCR.cryptoaesbase import write_to_file, read_from_file, CryptoAESBase, hexdigest, hexdigest_n, get_crc_from_file
+from nucosCR import write_to_file, read_from_file, CryptoAESBase, get_crc_from_file
 import getpass
 
 def exit(n):
@@ -100,9 +99,7 @@ if task=="c":
     exit(2)
 
 
-passphrase = hexdigest_n(password, 100)
-
-base = CryptoAESBase(passphrase)
+base = CryptoAESBase(password)
 
 
 if mode_source == "file":
@@ -113,15 +110,17 @@ if mode_source == "file":
     data = read_from_file(source)
     print("copy: ", source, dest_file)
     if task == "e":
-        endata = base.encryption(data)
+        endata, _ = base.encryption(data)
         if not os.path.exists(dest_file) or overwrite:
             write_to_file(dest_file, endata)
         else:
             print("copy chanceled, no overwrite mode (use -o to enable)")
     else:
         dedata, success = base.decryption(data)
-        if not os.path.exists(dest_file) or overwrite:
+        if success and (not os.path.exists(dest_file) or overwrite):
             write_to_file(dest_file, dedata)
+        elif not success:
+            print("Decryption failed, file not written")
         else:
             print("copy chanceled, no overwrite mode (use -o to enable)")
 elif mode_source == "dir":
@@ -146,7 +145,7 @@ elif mode_source == "dir":
             print("copy: ", source_file, dest_file)
             data = read_from_file(source_file)
             if task == "e":
-                endata = base.encryption(data)
+                endata, _ = base.encryption(data)
                 if not os.path.exists(dest_file) or overwrite:
                     write_to_file(dest_file, endata)
                 else:
